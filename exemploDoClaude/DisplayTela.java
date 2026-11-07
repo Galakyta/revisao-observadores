@@ -1,3 +1,4 @@
+package exemploDoClaude;
 public class DisplayTela implements Observer{
     @Override 
     public void atualizar(double temperatura){
