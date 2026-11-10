@@ -3,7 +3,7 @@ package questao1;
 public class Vendas implements Observer {
     private int ultimoEstado;
     @Override 
-    public void atualizar(Produtos produto){
+    public void atualizar(Produto produto){
         if(produto.estoque >= 0){
             ultimoEstado = produto.estoque;
         }

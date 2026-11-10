@@ -1,5 +1,5 @@
 package questao1;
 
 public interface Observer {
-    public void atualizar(Produtos produto);
+    public void atualizar(Produto produto);
 }

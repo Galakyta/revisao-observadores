@@ -3,47 +3,40 @@ package questao1;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Loja implements Subject{
+public class Produto implements Subject {
 
     private final List<Observer> observadores = new ArrayList<>();
+    private final String nome;
+    private int estoque;
 
-    private final List<Produtos> produtos = new ArrayList<>();
-    
+    public Produto(String nome, int estoque) {
+        this.nome = nome;
+        this.estoque = estoque;
+    }
 
-    Produtos produto;
+    public String getNome() { return nome; }
+    public int getEstoque() { return estoque; }
 
-    @Override 
-    public void inscrever(Observer observer){
+    public void setEstoque(int novoEstoque) {
+        if (novoEstoque == this.estoque) return;   // RQ1.4: não mudou, não avisa
+        this.estoque = novoEstoque;
+        pingarObservadores();                      // RQ1.3: avisa quem está inscrito neste produto
+    }
+
+    @Override
+    public void inscrever(Observer observer) {
         observadores.add(observer);
     }
+
     @Override
-    public void desinscrever(Observer observer){
+    public void desinscrever(Observer observer) {
         observadores.remove(observer);
     }
-    @Override 
-    public void pingarObservadores(){
-        for(Observer observer : observadores){
-            observer.atualizar(produto);
+
+    @Override
+    public void pingarObservadores() {
+        for (Observer observer : observadores) {
+            observer.atualizar(this);              // o próprio produto se manda, sem "qual produto?"
         }
     }
-
-    public void adicionarProduto(Produtos produto){
-        produtos.add(produto);
-    }
-
-    public void removerProduto(Produtos produto){
-        produtos.remove(produto);
-    }
-
-    public void listarProdutos(){
-        for(Produtos produto : produtos){
-            System.out.println(produto.nome + " // " + produto.estoque);
-        }
-    }
-
-    public void alterarEstoque(Produtos produto){
-         produto.atualizarEstoque();
-         pingarObservadores();
-    }
-
 }
